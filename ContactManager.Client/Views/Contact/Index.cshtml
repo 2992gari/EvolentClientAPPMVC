@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ContactManager.Client.ViewModel.ContactViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div align="center">
+    <a href="@Url.Action("Create","Contact")">Add New Contact </a>
+    <br /> <br />
+    @if (ViewBag.listContacts ==null)
+    {
+        <div class="question-summary">
+            <p>No Records found</p>
+        </div>        
+    }
+
+    else
+    {
+        <table cellpadding="2" cellspacing="2" class="table" border="1">
+            <tr class="btn-primary">
+                <th>ID</th>
+                <th>FirstName </th>
+                <th>LastName </th>
+                <th>Address </th>
+                <th>Email</th>
+                <th>PhoneNumber </th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            @foreach (var item in ViewBag.listContacts)
+            {
+                <tr class="btn-success">
+                    <td>@item.ID</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Address</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <a onclick="return confirm('Do you want to Delete?')" href="@Url.Action("Delete","Contact",new {id=item.ID })">Delete</a>||
+                        <a href="@Url.Action("Edit","Contact",new {id=item.ID })">Edit</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+   
+</div>
+
